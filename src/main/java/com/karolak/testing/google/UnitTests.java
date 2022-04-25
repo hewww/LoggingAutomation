@@ -116,6 +116,4 @@ public class UnitTests {
             Assert.fail("Test Failed, propably captcha enabled");
         }
     }
-
-
 }

@@ -5,16 +5,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit38ClassRunner;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -116,4 +112,21 @@ public class UnitTests {
             Assert.fail("Test Failed, propably captcha enabled");
         }
     }
+
+    @Test
+    public void testPasswordLetterLength() {
+
+        //When
+        WebElement loginField = driver.findElement(By.xpath(XPATH_LOGIN));
+        WebElement passField = driver.findElement(By.xpath(XPATH_PASS));
+
+        //Then
+        loginField.sendKeys("testingkris");
+        passField.sendKeys("adminos123!");
+        passField.submit();
+
+        //Assert
+        Assert.assertTrue(driver.findElement(By.xpath(XPATH_RESULT)).isDisplayed());
+    }
+
 }

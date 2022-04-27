@@ -11,7 +11,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.concurrent.TimeUnit;
 
 import static com.karolak.testing.config.WebDriverConfig.CHROME;
@@ -31,10 +30,6 @@ public class UnitTests {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://www.nazwa.pl/zaloguj-sie");
         driver.manage().window().maximize();
-        WebElement loginField = driver.findElement(By.xpath(XPATH_LOGIN));
-        WebElement passField = driver.findElement(By.xpath(XPATH_PASS));
-        loginField.clear();
-        passField.clear();
     }
 
     @After
@@ -46,7 +41,7 @@ public class UnitTests {
     @Test
     public void testProperlyLogging() {
 
-        //Given
+        //When
         WebElement loginField = driver.findElement(By.xpath(XPATH_LOGIN));
         WebElement passField = driver.findElement(By.xpath(XPATH_PASS));
 
@@ -109,24 +104,24 @@ public class UnitTests {
             alert.dismiss();
             Assert.assertTrue(passField.isDisplayed() & loginField.isDisplayed());
         } catch (Exception e) {
-            Assert.fail("Test Failed, propably captcha enabled");
+            Assert.fail("Test Failed, probably captcha enabled");
         }
     }
 
     @Test
     public void testPasswordLetterLength() {
 
-        //When
-        WebElement loginField = driver.findElement(By.xpath(XPATH_LOGIN));
-        WebElement passField = driver.findElement(By.xpath(XPATH_PASS));
+            //When
+            WebElement loginField = driver.findElement(By.xpath(XPATH_LOGIN));
+            WebElement passField = driver.findElement(By.xpath(XPATH_PASS));
 
-        //Then
-        loginField.sendKeys("testingkris");
-        passField.sendKeys("adminos123!");
-        passField.submit();
+            //Then
+            loginField.sendKeys("testingkris");
+            passField.sendKeys("adminos123!");
+            passField.submit();
 
         //Assert
-        Assert.assertTrue(driver.findElement(By.xpath(XPATH_RESULT)).isDisplayed());
+         driver.switchTo().alert().getText().contains("");
     }
 
 }
